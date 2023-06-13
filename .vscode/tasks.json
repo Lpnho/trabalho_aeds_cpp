@@ -1,0 +1,62 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "run",
+            "command": "./build/main",
+            "type": "shell",
+            "dependsOn": "build",
+            "presentation": {
+                "reveal": "always",
+                "clear": true
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+        {
+            "label": "build",
+            "command": "cmake",
+            "type": "shell",
+            "args": [
+                "--build",
+                "build/"
+            ],
+            "dependsOn": "cmake-start",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "clear": true
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+        },
+        {
+            "label": "cmake-start",
+            "command": "cmake",
+            "type": "shell",
+            "args": [
+                "-S",
+                ".",
+                "-B",
+                "build/"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "clear": true
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+        }
+    ]
+}
