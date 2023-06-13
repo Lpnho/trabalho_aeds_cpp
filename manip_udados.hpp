@@ -21,7 +21,7 @@ union UDados
     } registro;
 };
 
-class Manip_UDados
+class ManipUDados
 {
 private:
     std::fstream _arquivo;
@@ -29,7 +29,7 @@ private:
     int _tamanho_udados;
 
 public:
-    Manip_UDados(string caminho_arquivo) : _tamanho_udados(sizeof(UDados)),
+    ManipUDados(string caminho_arquivo) : _tamanho_udados(sizeof(UDados)),
                                            _caminho_arquivo(std::move(caminho_arquivo))
     {
     }
@@ -38,9 +38,9 @@ public:
     void fechar_aquivo();
     void imprimir_arquivo();
 
-    void posicionar_ponteiro_get(std::streamsize posicao);
-    void posicionar_ponteiro_put(std::streamsize posicao);
-    void posicionar_ponteiros(std::streamsize posicao);
+    ManipUDados &posicionar_ponteiro_get(std::streamsize posicao);
+    ManipUDados &posicionar_ponteiro_put(std::streamsize posicao);
+    ManipUDados &posicionar_ponteiros(std::streamsize posicao);
 
     void ler_udados(UDados& entrada);
     void gravar_udados(UDados& entrada);

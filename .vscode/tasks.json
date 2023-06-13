@@ -44,7 +44,9 @@
                 "-S",
                 ".",
                 "-B",
-                "build/"
+                "build/",
+                "-G",
+                "MinGW Makefiles"
             ],
             "problemMatcher": [
                 "$gcc"
