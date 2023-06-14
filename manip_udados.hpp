@@ -32,8 +32,10 @@ public:
     ManipUDados(string caminho_arquivo) : _tamanho_udados(sizeof(UDados)),
                                           _caminho_arquivo(std::move(caminho_arquivo))
     {
+        abrir_arquivo();
     }
     ~ManipUDados() { fechar_aquivo(); }
+    
     void abrir_arquivo();
     void fechar_aquivo()
     {
@@ -66,14 +68,22 @@ public:
         posicionar_ponteiro_put(posicao);
         gravar_udados(entrada);
     }
+    void gravar_registro(UDados::Registro &registro)
+    {
+        UDados dados;
+        dados.registro = registro;
+        gravar_udados(dados);
+    }
 
-    void inicializar_registro(int quantidade_registros);
+    void inicializar_lista_registros(int quantidade_registros);
 
     void inserir_registro(UDados::Registro entrada);
     void inserir_registro_ordenado(UDados::Registro entrada);
     void remover_registro(UDados::Registro entrada);
+
     void imprimir_registros_validos();
     void imprimir_registros_livres();
+    void imprimir_cabecalho();
 
     int buscar_registro(UDados::Registro &registro);
 
