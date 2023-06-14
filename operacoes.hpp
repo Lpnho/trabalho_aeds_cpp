@@ -1,40 +1,6 @@
 #pragma once
 #include "manip_udados.hpp"
 
-//  entrada = menu_opcoes();
-//         switch (entrada)
-//         {
-//         case 0:
-//             break;
-//         case 1:
-//             operador->inserir_elemento();
-//             break;
-//         case 2:
-//             operador->remover_elemento();
-//             break;
-//         case 3:
-//             operador->inserir_elementos_ordenados();
-//             break;
-//         case 4:
-//             operador->imprimir_tudo();
-//             break;
-//         case 5:
-//             operador->imprimir_registros_validos();
-//             break;
-//         case 6:
-//             operador->imprimir_registros_livres();
-//             break;
-//         case 7:
-//             operador->buscar_registro();
-//             break;
-//         case 8:
-//             operador->imprimir_cabecalho();
-//             break;
-//         case 9:
-//             operador->imprimir_registro_por_posicao();
-//             break;
-//         case 10:
-
 class Operacoes
 {
 private:
