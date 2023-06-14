@@ -71,3 +71,28 @@ void ManipUDados::inicializar_registro(int quantidade_registros)
         gravar_udados(dados);
     }
 }
+
+int ManipUDados::buscar_registro(UDados::Registro &registro)
+{
+    UDados auxiliar;
+    posicionar_ponteiro_get(0).ler_udados(auxiliar);
+    int retorno = auxiliar.cabecalho.primeiro;
+    if (auxiliar.cabecalho.primeiro != -1)
+    {
+        posicionar_ponteiro_get(auxiliar.cabecalho.primeiro).ler_udados(auxiliar);
+        do
+        {
+            if (auxiliar.registro.chave == registro.chave)
+            {
+                registro.anterior = auxiliar.registro.anterior;
+                registro.proximo = auxiliar.registro.proximo;
+                return retorno;
+            }
+            retorno = auxiliar.registro.proximo;
+            if (retorno == -1)
+                break;
+            posicionar_ponteiro_get(auxiliar.registro.proximo).ler_udados(auxiliar);
+        } while (auxiliar.registro.proximo != -1);
+    }
+    return -1;
+}

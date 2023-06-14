@@ -62,12 +62,14 @@ public:
     }
 
     void inicializar_registro(int quantidade_registros);
-    void inserir_registro();
-    void inserir_registro_ordenado();
-    void remover_registro();
+
+    void inserir_registro(UDados::Registro entrada);
+    void inserir_registro_ordenado(UDados::Registro entrada);
+    void remover_registro(UDados::Registro entrada);
     void imprimir_registros_validos();
     void imprimir_registros_livres();
-    int buscar_registro(UDados::Registro registro);
+   
+    int buscar_registro(UDados::Registro& registro);
 
     void imprimir_cabecalho(const UDados::Cabecalho &cabecalho)
     {
