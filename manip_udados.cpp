@@ -102,6 +102,74 @@ void ManipUDados::inserir_registro(UDados::Registro entrada)
     posicionar_ponteiro_put(0).gravar_udados(cabecalho);
 }
 
+void ManipUDados::inserir_registro_ordenado(UDados::Registro entrada)
+{
+    UDados cabecalho, dados, anterior;
+    posicionar_ponteiro_get(0).ler_udados(cabecalho);
+    if (cabecalho.cabecalho.primeiro == -1)
+    {
+        inserir_registro(std::move(entrada));
+    }
+    else
+    {
+        posicionar_ponteiro_get(cabecalho.cabecalho.primeiro).ler_udados(dados);
+        while (entrada.chave > dados.registro.chave && dados.registro.proximo != -1)
+        {
+            posicionar_ponteiro_get(dados.registro.proximo).ler_udados(dados);
+        }
+        if (entrada.chave == dados.registro.chave)
+        {
+            throw std::runtime_error("Erro ao tentar inserir um registro. Chave já existente\n");
+        }
+        if (entrada.chave > dados.registro.chave && dados.registro.proximo == -1)
+        {
+            inserir_registro(std::move(entrada));
+        }
+        else
+        {
+            int posicao_atual{0}, posicao_anterior{0}, posicao_posterior{0};
+            posicao_atual = cabecalho.cabecalho.livre;
+            posicao_anterior = dados.registro.anterior;
+
+            if (posicao_atual != -1)
+            {
+                if (posicao_anterior != -1)
+                {
+                    posicionar_ponteiro_get(posicao_anterior).ler_udados(anterior);
+                    posicao_posterior = anterior.registro.proximo;
+                    anterior.registro.proximo = posicao_atual;
+                    posicionar_ponteiro_put(posicao_anterior).gravar_udados(anterior);
+                }
+                else
+                {
+                    posicao_posterior = cabecalho.cabecalho.primeiro;
+                    cabecalho.cabecalho.primeiro = posicao_atual;
+                    
+                }
+                dados.registro.anterior = posicao_atual;
+                posicionar_ponteiro_put(posicao_posterior).gravar_udados(dados);
+                posicionar_ponteiro_get(posicao_atual).ler_udados(dados);
+
+                cabecalho.cabecalho.livre = dados.registro.proximo;
+                cabecalho.cabecalho.quantidade++; 
+                
+                dados.registro.chave = entrada.chave;
+                dados.registro.anterior = posicao_anterior;
+                dados.registro.proximo = posicao_posterior;
+
+
+
+                posicionar_ponteiro_put(posicao_atual).gravar_udados(dados);
+                posicionar_ponteiro_put(0).gravar_udados(cabecalho);
+            }
+            else
+            {
+                throw std::runtime_error("Erro ao tentar inserir um registro. Lista cheia.\n");
+            }
+        }
+    }
+}
+
 void ManipUDados::remover_registro(UDados::Registro entrada)
 {
     int posicao_registro = buscar_registro(entrada);
