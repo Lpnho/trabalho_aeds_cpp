@@ -12,7 +12,7 @@ union UDados
 {
     struct Cabecalho
     {
-        int quantidate, primeiro, ultimo, livre;
+        int quantidade, primeiro, ultimo, livre;
     } cabecalho;
 
     struct Registro
@@ -36,16 +36,32 @@ public:
     ~ManipUDados() { fechar_aquivo(); }
     void abrir_arquivo();
     void fechar_aquivo();
-    void imprimir_arquivo();
 
     ManipUDados &posicionar_ponteiro_get(std::streamsize posicao);
     ManipUDados &posicionar_ponteiro_put(std::streamsize posicao);
-    ManipUDados &posicionar_ponteiros(std::streamsize posicao);
+    ManipUDados &posicionar_ponteiros(std::streamsize posicao)
+    {
+        posicionar_ponteiro_put(posicao);
+        posicionar_ponteiro_get(posicao);
+        return (*this);
+    }
+    ManipUDados &operator[](std::streamsize posicao) { return posicionar_ponteiros(posicao); }
 
     void ler_udados(UDados &entrada);
     void gravar_udados(UDados &entrada);
 
-    void inicializar_registro();
+    void ler_udados(UDados &entrada, std::streamsize posicao)
+    {
+        posicionar_ponteiro_get(posicao);
+        ler_udados(entrada);
+    }
+    void gravar_udados(UDados &entrada, std::streamsize posicao)
+    {
+        posicionar_ponteiro_put(posicao);
+        gravar_udados(entrada);
+    }
+
+    void inicializar_registro(int quantidade_registros);
     void inserir_registro();
     void inserir_registro_ordenado();
     void remover_registro();
@@ -53,6 +69,18 @@ public:
     void imprimir_registros_livres();
     int buscar_registro(UDados::Registro registro);
 
-    void imprimir_cabecalho(const UDados::Cabecalho &registro);
-    void imprimir_registro(const UDados::Registro &registro);
+    void imprimir_cabecalho(const UDados::Cabecalho &cabecalho)
+    {
+        cout << "********** Cabeçalho ********** \n"
+             << "Quantidade: " << cabecalho.quantidade << '\n'
+             << "Primeiro: " << cabecalho.primeiro << '\n'
+             << "Último: " << cabecalho.ultimo << '\n'
+             << "Livre: " << cabecalho.livre << '\n';
+    }
+    void imprimir_registro(const UDados::Registro &registro)
+    {
+        cout << "Chave: " << registro.chave << '\n'
+             << "Próximo: " << registro.proximo << '\n'
+             << "Anterior: " << registro.anterior << "\n\n";
+    }
 };

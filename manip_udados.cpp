@@ -40,13 +40,6 @@ ManipUDados &ManipUDados::posicionar_ponteiro_put(std::streamsize posicao)
     return (*this);
 }
 
-ManipUDados &ManipUDados::posicionar_ponteiros(std::streamsize posicao)
-{
-    posicionar_ponteiro_put(posicao);
-    posicionar_ponteiro_get(posicao);
-    return (*this);
-}
-
 void ManipUDados::ler_udados(UDados &entrada)
 {
     _arquivo.read(reinterpret_cast<char *>(&entrada), _tamanho_udados);
@@ -65,4 +58,16 @@ void ManipUDados::gravar_udados(UDados &entrada)
     }
 }
 
+void ManipUDados::inicializar_registro(int quantidade_registros)
+{
+    UDados dados;
+    dados.cabecalho = {0, -1, -1, 1};
 
+    posicionar_ponteiro_put(0);
+    gravar_udados(dados);
+    for (int i{1}; i <= quantidade_registros; ++i)
+    {
+        dados.registro.proximo = ((i == quantidade_registros) ? -1 : i + 1);
+        gravar_udados(dados);
+    }
+}
