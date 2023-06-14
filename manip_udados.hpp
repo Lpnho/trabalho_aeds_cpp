@@ -68,7 +68,6 @@ public:
         posicionar_ponteiro_put(posicao);
         gravar_udados(entrada);
     }
-    
     void gravar_registro(UDados::Registro &registro)
     {
         UDados dados;

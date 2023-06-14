@@ -8,4 +8,6 @@ add_executable(
     main.cpp
     manip_udados.hpp
     manip_udados.cpp
+    operacoes.hpp
+    menu.hpp
 )
