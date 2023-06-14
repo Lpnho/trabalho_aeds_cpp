@@ -12,13 +12,6 @@ void ManipUDados::abrir_arquivo()
     }
 }
 
-void ManipUDados::fechar_aquivo()
-{
-    if (_arquivo.is_open())
-    {
-        _arquivo.close();
-    }
-}
 
 ManipUDados &ManipUDados::posicionar_ponteiro_get(std::streamsize posicao)
 {

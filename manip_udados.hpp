@@ -35,7 +35,13 @@ public:
     }
     ~ManipUDados() { fechar_aquivo(); }
     void abrir_arquivo();
-    void fechar_aquivo();
+    void fechar_aquivo()
+    {
+        if (_arquivo.is_open())
+        {
+            _arquivo.close();
+        }
+    }
 
     ManipUDados &posicionar_ponteiro_get(std::streamsize posicao);
     ManipUDados &posicionar_ponteiro_put(std::streamsize posicao);
@@ -68,8 +74,8 @@ public:
     void remover_registro(UDados::Registro entrada);
     void imprimir_registros_validos();
     void imprimir_registros_livres();
-   
-    int buscar_registro(UDados::Registro& registro);
+
+    int buscar_registro(UDados::Registro &registro);
 
     void imprimir_cabecalho(const UDados::Cabecalho &cabecalho)
     {
