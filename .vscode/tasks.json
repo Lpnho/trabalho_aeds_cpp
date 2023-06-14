@@ -23,7 +23,6 @@
                 "--build",
                 "build/"
             ],
-            "dependsOn": "cmake-start",
             "problemMatcher": [
                 "$gcc"
             ],
@@ -37,7 +36,7 @@
             },
         },
         {
-            "label": "cmake-start",
+            "label": "cmake-start-windows",
             "command": "cmake",
             "type": "shell",
             "args": [
@@ -47,6 +46,28 @@
                 "build/",
                 "-G",
                 "MinGW Makefiles"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "clear": true
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+        },
+        {
+            "label": "cmake-start-linux",
+            "command": "cmake",
+            "type": "shell",
+            "args": [
+                "-S",
+                ".",
+                "-B",
+                "build/",
             ],
             "problemMatcher": [
                 "$gcc"

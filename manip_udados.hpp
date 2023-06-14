@@ -30,10 +30,10 @@ private:
 
 public:
     ManipUDados(string caminho_arquivo) : _tamanho_udados(sizeof(UDados)),
-                                           _caminho_arquivo(std::move(caminho_arquivo))
+                                          _caminho_arquivo(std::move(caminho_arquivo))
     {
     }
-
+    ~ManipUDados() { fechar_aquivo(); }
     void abrir_arquivo();
     void fechar_aquivo();
     void imprimir_arquivo();
@@ -42,9 +42,8 @@ public:
     ManipUDados &posicionar_ponteiro_put(std::streamsize posicao);
     ManipUDados &posicionar_ponteiros(std::streamsize posicao);
 
-    void ler_udados(UDados& entrada);
-    void gravar_udados(UDados& entrada);
-
+    void ler_udados(UDados &entrada);
+    void gravar_udados(UDados &entrada);
 
     void inicializar_registro();
     void inserir_registro();
