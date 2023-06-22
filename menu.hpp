@@ -1,5 +1,5 @@
 #pragma once
-#define DEBUG
+
 #include <string>
 #include <cstdlib>
 #include <iostream>

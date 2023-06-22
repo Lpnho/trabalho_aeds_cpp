@@ -14,6 +14,7 @@ public:
     {
         _arquivo.inicializar_lista_registros(quatidade_dados);
     }
+    /* Inseri o registro com base na chave*/
     void inserir(int chave)
     {
         try
@@ -49,6 +50,7 @@ public:
     }
 
     // Interface de Operações
+
     void inserir_elemento()
     {
         int entrada{0};
