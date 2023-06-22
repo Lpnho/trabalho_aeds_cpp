@@ -6,7 +6,7 @@ O intuito do projeto foi exercitar a orientação a objetos e práticar a progra
 
 #### Windowns com CMake e MinGW
 ``` 
-cmake -S . -B build/ -G"MinGW Makefiles"
+cmake -S . -B build/ -G "MinGW Makefiles"
 cmake --build build
 ```
 #### Linux e derivados 
